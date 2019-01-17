@@ -1,19 +1,14 @@
 #!/bin/sh
 
+dir="rss/$(date -I)"
+mkdir -p "$dir"
+
 while read loc1 loc2
 do
-
-	dir="rss/$loc1"
-	mkdir -p "$dir"
-
-	file="$dir/$(date -I).xml.gz"
-	printf "%-40s " "$file"
-
-	[ -f "$file" ] && echo 'Exists' && continue
-
+	file="$dir/$loc1.rss"
+	echo "$file"
 	url="https://polisen.se/aktuellt/rss/$loc1/handelser-rss---$loc2/"
-	curl -sS "$url" | gzip > "$file" && echo 'Downloaded'
-
+	curl -sS "$url" >"$file"
 done \
 <<LOCATIONS
 blekinge         blekinge
@@ -38,3 +33,6 @@ vastra-gotaland  vastra-gotaland
 orebro-lan       orebro-lan
 ostergotland     ostergotland
 LOCATIONS
+
+tar="$dir.tar.gz"
+tar czf "$tar" -C "$dir" . && echo "==> $tar" && rm -r "$dir"
