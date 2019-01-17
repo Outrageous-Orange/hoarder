@@ -1,4 +1,6 @@
 #!/bin/sh
+set -o errexit
+set -o pipefail
 
 dir='api'
 mkdir -p "$dir"

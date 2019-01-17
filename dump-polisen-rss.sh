@@ -1,4 +1,6 @@
 #!/bin/sh
+set -o errexit
+set -o pipefail
 
 dir="rss/$(date -I)"
 mkdir -p "$dir"
