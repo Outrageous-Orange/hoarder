@@ -28,6 +28,19 @@ pipreqs . --force
 
 `Scrap.py` is a small script that can scrap a url based on a set of patterns.
 
+``` bash
+./scrap.py -h
+usage: scrap.py [-h] [-u URL] -s NAME:XPATH [NAME:XPATH ...] [-v]
+
+Webscraper
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -u URL, --url URL     Site to scrap
+  -s NAME:XPATH [NAME:XPATH ...], --scrap NAME:XPATH [NAME:XPATH ...]
+                        Scraping pattern
+  -v, --verbose         increase output verbosity
+```
 
 ### Examples:
 **Example 1**: BBC.com

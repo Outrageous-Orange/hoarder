@@ -28,7 +28,6 @@ if args.verbose:
 page = requests.get(args.url)
 tree = html.fromstring(page.content)
 
-# print (page.content)
 response_json = {}
 for patternName in patterns:
     pattern = patterns[patternName]
