@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-
 import json
 import argparse
 from pprint import pprint
 from lxml import html
-import requests
+from urllib.request import urlopen, Request
 
 parser = argparse.ArgumentParser(description='Webscraper')
 parser.add_argument('-u', '--url', metavar='URL', help='Site to scrap')
@@ -13,7 +12,7 @@ parser.add_argument("-v", "--verbose", help="increase output verbosity", action=
 
 args = parser.parse_args()
 if args.verbose:
-    print "verbosity turned on to %s" % args.verbose
+    print("verbosity turned on to %s" % args.verbose)
 
 patterns = {}
 for pattern in args.scrap:
@@ -22,11 +21,14 @@ for pattern in args.scrap:
 
 if args.verbose:
     pprint(args, indent=3)
-    print ("URL: %s" % args.url)
+    print("URL: %s" % args.url)
     pprint(patterns, indent=3)
 
-page = requests.get(args.url)
-tree = html.fromstring(page.content)
+request = Request(args.url)
+request.add_header('Accept-Encoding', 'utf-8')
+# page = requests.get(args.url)
+page = urlopen(request)
+tree = html.fromstring(page.read().decode('utf-8', 'ignore'))
 
 response_json = {}
 for patternName in patterns:
@@ -42,4 +44,4 @@ for patternName in patterns:
             children.append(e.strip())
     response_json[patternName] = children
 
-print json.dumps(response_json, separators=(',', ':'))
+print(json.dumps(response_json, separators=(',', ':'), ensure_ascii=False))
