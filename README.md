@@ -11,7 +11,10 @@ Run the scripts from `cron`, e.g.
 ```
 
 ## Python Setup
-To run the python parts of this repo you need to install python requirements:   
+
+**ONLY tested with Python 3.6 see [how to to change the default python version](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)**
+
+To run the python parts of this repo you need to install python requirements:
 
 ``` python
 pip install -r requirements.txt
@@ -20,7 +23,7 @@ pip install -r requirements.txt
 If you are introducing new dependencies, you can generate the `requirements.txt` file, using `pipreqs`:
 
 ``` python
-sudo -H pip install pipreqs 
+sudo -H pip install pipreqs
 pipreqs . --force
 ```
 
