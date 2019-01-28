@@ -26,7 +26,7 @@ if args.verbose:
 
 request = Request(args.url)
 request.add_header('Accept-Encoding', 'utf-8')
-# page = requests.get(args.url)
+
 page = urlopen(request)
 tree = html.fromstring(page.read().decode('utf-8', 'ignore'))
 
